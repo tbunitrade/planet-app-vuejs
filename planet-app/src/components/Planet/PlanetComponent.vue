@@ -1,6 +1,6 @@
 <template>
   <div :class="['orbit', `orbit-${orbitSize}`]" :style="orbitStyle">
-    <div class="planet" @mouseover="isHovered = true" @mouseleave="isHovered = false">
+    <div class="planet" :style="planetStyle" @mouseover="isHovered = true" @mouseleave="isHovered = false">
       <div v-if="isHovered" class="tooltip">{{ name }}</div>
     </div>
   </div>
@@ -29,17 +29,29 @@ export default {
   },
   data() {
     return {
-      isHovered: false,
-      orbitStyle: {
+      isHovered: false
+    };
+  },
+  computed: {
+    orbitStyle() {
+      return {
         width: `${this.orbitSize}px`,
         height: `${this.orbitSize}px`,
         top: `calc(50% - ${this.orbitSize / 2}px)`,
         left: `calc(50% - ${this.orbitSize / 2}px)`,
         animationDuration: `${this.orbitSpeed}s`,
-        transformOrigin: `center center`,
+        transformOrigin: 'center center',
         transform: `rotate(${this.initialAngle}deg)`
-      }
-    };
+      };
+    },
+    planetStyle() {
+      const angleInRadians = (this.initialAngle * Math.PI) / 180;
+      const x = (this.orbitSize / 2) * Math.cos(angleInRadians);
+      const y = (this.orbitSize / 2) * Math.sin(angleInRadians);
+      return {
+        transform: `translate(${x}px, ${y}px)`
+      };
+    }
   }
 };
 </script>
@@ -57,13 +69,12 @@ export default {
   border-radius: 50%;
   position: absolute;
   top: 50%;
-  left: 0;
-  transform: translate(-50%, -50%);
+  left: 50%;
   transition: transform 0.3s ease;
 }
 
 .planet:hover {
-  transform: translate(-50%, -50%) scale(1.2);
+  transform: scale(1.2);
 }
 
 .tooltip {
@@ -86,4 +97,3 @@ export default {
   }
 }
 </style>
-

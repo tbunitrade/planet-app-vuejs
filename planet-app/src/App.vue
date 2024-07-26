@@ -1,27 +1,37 @@
 <template>
   <div id="app">
     <SunComponent @expand="handleSunExpand" />
-    <PlanetsComponent :isExpanding="isExpanding" />
+    <PlanetsContainer :isExpanding="isExpanding" @open-chat="openChat" />
+    <ChatWindow :isOpen="isChatOpen" @close="closeChat" />
   </div>
 </template>
 
 <script>
 import SunComponent from './components/Sun/SunComponent.vue';
-import PlanetsComponent from './components/Planets/PlanetsComponent.vue';
+import PlanetsContainer from './components/Planets/PlanetsContainer.vue';
+import ChatWindow from './components/Chat/ChatWindow.vue';
 
 export default {
   components: {
     SunComponent,
-    PlanetsComponent
+    PlanetsContainer,
+    ChatWindow
   },
   data() {
     return {
-      isExpanding: false
+      isExpanding: false,
+      isChatOpen: false
     };
   },
   methods: {
     handleSunExpand() {
       this.isExpanding = true;
+    },
+    openChat() {
+      this.isChatOpen = true;
+    },
+    closeChat() {
+      this.isChatOpen = false;
     }
   }
 };
