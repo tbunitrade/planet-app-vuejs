@@ -1,5 +1,5 @@
 <template>
-  <div class="orbit">
+  <div :class="['orbit', `orbit-${orbitSize}`]" :style="{top:`${initialTop}px`}" >
     <div class="planet" @mouseover="isHovered = true" @mouseleave="isHovered = false">
       <div v-if="isHovered" class="tooltip">{{ name }}</div>
     </div>
@@ -12,6 +12,14 @@ export default {
   props: {
     name: {
       type: String,
+      required: true
+    },
+    orbitSize:{
+      type: Number,
+      required: true
+    },
+    initialTop: {
+      type: Number,
       required: true
     }
   },
@@ -26,12 +34,38 @@ export default {
 <style scoped>
 .orbit {
   position: absolute;
-  top: 50%;
   left: 50%;
+  animation: orbit 10s linear infinite;
+}
+
+.orbit-145 {
+  width: 400px;
+  height: 400px;
+  margin: -200px;
+}
+
+.orbit-200 {
   width: 200px;
   height: 200px;
-  margin: -100px 0 0 -100px;
-  animation: orbit 10s linear infinite;
+  margin: -100px;
+}
+
+.orbit-300 {
+  width: 300px;
+  height: 300px;
+  margin:-150px;
+}
+
+.orbit-500 {
+  width: 500px;
+  height: 500px;
+  margin:-250px;
+}
+
+.orbit-600 {
+  width: 600px;
+  height: 600px;
+  margin: -300px;
 }
 
 .planet {
