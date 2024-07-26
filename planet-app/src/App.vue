@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div class="sun"></div>
     <PlanetComponent name="Нейминг адрес сайта" :orbitSize="500" :initialTop="250" :orbitSpeed="10" />
     <PlanetComponent name="Прототипирование проекта" :orbitSize="500" :initialTop="277" :orbitSpeed="15"/>
     <PlanetComponent name="Дизайн для Веба" :orbitSize="500" :initialTop="450" :orbitSpeed="50"/>
