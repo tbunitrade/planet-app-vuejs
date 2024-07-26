@@ -1,20 +1,28 @@
 <template>
   <div id="app">
-    <div class="sun"></div>
-    <PlanetComponent name="Нейминг адрес сайта" :orbitSize="500" :initialTop="250" :orbitSpeed="10" />
-    <PlanetComponent name="Прототипирование проекта" :orbitSize="500" :initialTop="277" :orbitSpeed="15"/>
-    <PlanetComponent name="Дизайн для Веба" :orbitSize="500" :initialTop="450" :orbitSpeed="50"/>
-    <PlanetComponent name="Вертска дизайна" :orbitSize="500" :initialTop="500" :orbitSpeed="25" />
-    <PlanetComponent name="Обратная связь" :orbitSize="500" :initialTop="550"  :orbitSpeed="300"/>
+    <SunComponent @expand="handleSunExpand" />
+    <PlanetsComponent :isExpanding="isExpanding" />
   </div>
 </template>
 
 <script>
-import PlanetComponent from './components/PlanetComponent.vue';
+import SunComponent from './components/Sun/SunComponent.vue';
+import PlanetsComponent from './components/Planets/PlanetsComponent.vue';
 
 export default {
   components: {
-    PlanetComponent
+    SunComponent,
+    PlanetsComponent
+  },
+  data() {
+    return {
+      isExpanding: false
+    };
+  },
+  methods: {
+    handleSunExpand() {
+      this.isExpanding = true;
+    }
   }
 };
 </script>

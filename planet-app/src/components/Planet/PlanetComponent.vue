@@ -1,5 +1,5 @@
 <template>
-  <div :class="['orbit', `orbit-${orbitSize}`]" :style="{top:`${initialTop}px`, animationDuration:`${orbitSpeed}s`}" >
+  <div :class="['orbit', `orbit-${orbitSize}`]" :style="orbitStyle">
     <div class="planet" @mouseover="isHovered = true" @mouseleave="isHovered = false">
       <div v-if="isHovered" class="tooltip">{{ name }}</div>
     </div>
@@ -14,11 +14,11 @@ export default {
       type: String,
       required: true
     },
-    orbitSize:{
+    orbitSize: {
       type: Number,
       required: true
     },
-    initialTop: {
+    initialAngle: {
       type: Number,
       required: true
     },
@@ -29,7 +29,16 @@ export default {
   },
   data() {
     return {
-      isHovered: false
+      isHovered: false,
+      orbitStyle: {
+        width: `${this.orbitSize}px`,
+        height: `${this.orbitSize}px`,
+        top: `calc(50% - ${this.orbitSize / 2}px)`,
+        left: `calc(50% - ${this.orbitSize / 2}px)`,
+        animationDuration: `${this.orbitSpeed}s`,
+        transformOrigin: `center center`,
+        transform: `rotate(${this.initialAngle}deg)`
+      }
     };
   }
 };
@@ -38,54 +47,23 @@ export default {
 <style scoped>
 .orbit {
   position: absolute;
-  left: 50%;
   animation: orbit linear infinite;
 }
 
-.orbit-145 {
-  width: 400px;
-  height: 400px;
-  margin-left: -100px;
-}
-
-.orbit-200 {
-  width: 200px;
-  height: 200px;
-  margin-left: -150px;
-}
-
-.orbit-300 {
-  width: 300px;
-  height: 300px;
-  margin-left: -200px;
-}
-
-.orbit-500 {
-  width: 500px;
-  height: 500px;
-  margin-left: -300px;
-}
-
-.orbit-600 {
-  width: 600px;
-  height: 600px;
-  margin-left: -500px;
-}
-
 .planet {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   background-color: gray;
   border-radius: 50%;
   position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -50%);
   transition: transform 0.3s ease;
 }
 
 .planet:hover {
-  transform: translateX(-50%) scale(1.2);
+  transform: translate(-50%, -50%) scale(1.2);
 }
 
 .tooltip {
@@ -108,3 +86,4 @@ export default {
   }
 }
 </style>
+
