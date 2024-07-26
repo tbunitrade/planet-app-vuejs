@@ -1,28 +1,27 @@
 <template>
   <div id="app">
-    <Planet name="Нейминг адрес сайта" />
-    <Planet name="Прототипирование проекта" />
-    <Planet name="Дизайн для Веба" />
-    <Planet name="Вертска дизайна" />
-    <Planet name="Обратная связь" />
+    <Planet name="Нейминг адрес сайта" :orbitSize="145" />
+    <Planet name="Прототипирование проекта" :orbitSize="200" />
+    <Planet name="Дизайн для Веба"  :orbitSize="300" />
+    <Planet name="Вертска дизайна" :orbitSize="500"/>
+    <Planet name="Обратная связь" :orbitSize="600" />
   </div>
 </template>
 
 <script>
-import Planet from './components/PlanetComponent.vue';
+import PlanetComponent from './components/PlanetComponent.vue';
 
 export default {
   components: {
-    Planet
+    PlanetComponent
   }
 };
 </script>
 
 <style>
 #app {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  position: relative;
+  width: 100vw;
   height: 100vh;
   background-color: #000;
   overflow: hidden;
